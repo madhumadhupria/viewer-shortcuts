@@ -218,12 +218,187 @@
             padding: 40px;
             color: #6c757d;
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                border-radius: 4px;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+
+            header h1 {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .search-section {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .search-box {
+                min-width: 100%;
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .filter-buttons {
+                gap: 6px;
+                width: 100%;
+            }
+
+            .filter-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                margin-bottom: 30px;
+            }
+
+            .section h2 {
+                font-size: 18px;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+
+            table {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            th {
+                padding: 10px;
+                font-size: 11px;
+            }
+
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+
+            .shortcut {
+                padding: 3px 6px;
+                font-size: 12px;
+            }
+
+            .badge {
+                padding: 3px 6px;
+                font-size: 10px;
+                margin-right: 6px;
+            }
+
+            .summary {
+                padding: 15px 20px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 8px;
+            }
+
+            header {
+                padding: 20px 15px;
+            }
+
+            header h1 {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+
+            header p {
+                font-size: 12px;
+            }
+
+            .search-section {
+                padding: 12px 15px;
+                gap: 10px;
+            }
+
+            .search-box {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .filter-btn {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .section {
+                margin-bottom: 25px;
+            }
+
+            .section h2 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            table {
+                font-size: 12px;
+                border-collapse: collapse;
+                width: 100%;
+                overflow-x: auto;
+                display: block;
+            }
+
+            th {
+                padding: 8px 6px;
+                font-size: 10px;
+                word-break: break-word;
+            }
+
+            td {
+                padding: 8px 6px;
+                font-size: 12px;
+                word-break: break-word;
+            }
+
+            .shortcut {
+                padding: 2px 4px;
+                font-size: 11px;
+            }
+
+            .badge {
+                padding: 2px 4px;
+                font-size: 9px;
+                margin-right: 4px;
+            }
+
+            .summary {
+                padding: 12px 15px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎮 Viewer Keyboard Shortcuts Reference</h1>
+            <h1>Viewer Keyboard Shortcuts Reference</h1>
             <p>Complete keyboard shortcut guide for Autodesk LMV, ACC Viewer, Markups, and related tools</p>
         </header>
 
@@ -253,25 +428,25 @@
                     </thead>
                     <tbody>
                         <tr class="shortcut-row" data-search="orbit tool orbit constrained orbit">
-                            <td><span class="shortcut">🔄 Orbit</span></td>
+                            <td><span class="shortcut">Orbit</span></td>
                             <td><span class="action">Orbit Tool</span></td>
                             <td><span class="shortcut">Alt</span> (hold)</td>
                             <td><span class="notes">Hold Alt and drag to rotate 3D view; submenu for Free Orbit option</span></td>
                         </tr>
                         <tr class="shortcut-row" data-search="pan tool shift space">
-                            <td><span class="shortcut">✋ Pan</span></td>
+                            <td><span class="shortcut">Pan</span></td>
                             <td><span class="action">Pan Tool</span></td>
                             <td><span class="shortcut">Shift</span> or <span class="shortcut">Space</span> (hold)</td>
                             <td><span class="notes">Hold Shift or Space and drag to pan view</span></td>
                         </tr>
                         <tr class="shortcut-row" data-search="zoom dolly tool">
-                            <td><span class="shortcut">🔍 Zoom</span></td>
+                            <td><span class="shortcut">Zoom</span></td>
                             <td><span class="action">Zoom/Dolly Tool</span></td>
                             <td><span class="shortcut">Mouse wheel</span></td>
                             <td><span class="notes">Scroll wheel zooms in and out; click button to switch modes</span></td>
                         </tr>
                         <tr class="shortcut-row" data-search="camera focal length roll fit to view">
-                            <td><span class="shortcut">📷 Camera</span></td>
+                            <td><span class="shortcut">Camera</span></td>
                             <td><span class="action">Camera Interactions</span></td>
                             <td><span class="shortcut">F</span> (Fit to View)</td>
                             <td><span class="notes">Submenu with Fit to View, Focal Length, and Roll options</span></td>
@@ -638,7 +813,7 @@
         </div>
 
         <div class="summary">
-            <strong>📊 Summary:</strong> Total of 50+ keyboard shortcuts across 5 viewer tools and extensions. Last updated: July 10, 2026. Source: firefly.js, ACC Viewer UI, and related extension codebases.
+            <strong>Summary:</strong> Total of 43 keyboard shortcuts across 5 viewer tools and extensions. Last updated: July 10, 2026. Source: firefly.js, ACC Viewer UI, and related extension codebases.
         </div>
     </div>
 

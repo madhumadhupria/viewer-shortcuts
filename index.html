@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer Keyboard Shortcuts Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 14px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .shortcut {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: #f1f3f5;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: 500;
+            color: #764ba2;
+            white-space: nowrap;
+        }
+
+        .action {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .viewer {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .notes {
+            color: #6c757d;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .summary {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-lmv {
+            background: #e7f5ff;
+            color: #1971c2;
+        }
+
+        .badge-edit2d {
+            background: #f0f9ff;
+            color: #0b7285;
+        }
+
+        .badge-markup {
+            background: #fff3bf;
+            color: #9c6d00;
+        }
+
+        .badge-markup-bim {
+            background: #f3f0ff;
+            color: #5f3dc4;
+        }
+
+        .badge-acc {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Viewer Keyboard Shortcuts Reference</h1>
+            <p>Complete keyboard shortcut guide for Autodesk LMV, ACC Viewer, Markups, and related tools</p>
+        </header>
+
+        <div class="search-section">
+            <input type="text" class="search-box" id="searchBox" placeholder="Search shortcuts (e.g., 'copy', 'Ctrl+C', 'Edit2D')...">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="lmv">LMV Viewer</button>
+                <button class="filter-btn" data-filter="edit2d">Edit2D</button>
+                <button class="filter-btn" data-filter="markup">Markups</button>
+                <button class="filter-btn" data-filter="acc">ACC Viewer</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Toolbar Section -->
+            <div class="section" data-category="lmv">
+                <h2><span class="badge badge-lmv">LMV VIEWER</span>Bottom Toolbar</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Toolbar Button</th>
+                            <th width="25%">Action</th>
+                            <th width="30%">Keyboard Shortcut</th>
+                            <th width="25%">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="shortcut-row" data-search="orbit tool orbit constrained orbit">
+                            <td><span class="shortcut">🔄 Orbit</span></td>
+                            <td><span class="action">Orbit Tool</span></td>
+                            <td><span class="shortcut">Alt</span> (hold)</td>
+                            <td><span class="notes">Hold Alt and drag to rotate 3D view; submenu for Free Orbit option</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="pan tool shift space">
+                            <td><span class="shortcut">✋ Pan</span></td>
+                            <td><span class="action">Pan Tool</span></td>
+                            <td><span class="shortcut">Shift</span> or <span class="shortcut">Space</span> (hold)</td>
+                            <td><span class="notes">Hold Shift or Space and drag to pan view</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="zoom dolly tool">
+                            <td><span class="shortcut">🔍 Zoom</span></td>
+                            <td><span class="action">Zoom/Dolly Tool</span></td>
+                            <td><span class="shortcut">Mouse wheel</span></td>
+                            <td><span class="notes">Scroll wheel zooms in and out; click button to switch modes</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="camera focal length roll fit to view">
+                            <td><span class="shortcut">📷 Camera</span></td>
+                            <td><span class="action">Camera Interactions</span></td>
+                            <td><span class="shortcut">F</span> (Fit to View)</td>
+                            <td><span class="notes">Submenu with Fit to View, Focal Length, and Roll options</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- LMV Viewer Section -->
+            <div class="section" data-category="lmv">
+                <h2><span class="badge badge-lmv">LMV VIEWER</span>Core Navigation Shortcuts</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Keyboard Shortcut</th>
+                            <th width="25%">Action</th>
+                            <th width="30%">Notes</th>
+                            <th width="25%">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="shortcut-row" data-search="fit to view f">
+                            <td><span class="shortcut">F</span></td>
+                            <td><span class="action">Fit to View</span></td>
+                            <td><span class="notes">Reset camera to view all objects</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="home view h home key">
+                            <td><span class="shortcut">H</span> or <span class="shortcut">Home</span></td>
+                            <td><span class="action">Home View</span></td>
+                            <td><span class="notes">Reset camera position to default</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="escape dismiss context menu">
+                            <td><span class="shortcut">Escape</span></td>
+                            <td><span class="action">Dismiss Context Menu</span></td>
+                            <td><span class="notes">Close any open context menu</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="shift pan tool navigation modifier">
+                            <td><span class="shortcut">Shift</span> (hold)</td>
+                            <td><span class="action">Activate Pan Tool</span></td>
+                            <td><span class="notes">Press and hold to enable pan mode</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="space bar pan tool navigation modifier">
+                            <td><span class="shortcut">Space</span> (hold)</td>
+                            <td><span class="action">Activate Pan Tool</span></td>
+                            <td><span class="notes">Alternative to Shift for panning</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="alt orbit tool 3d models">
+                            <td><span class="shortcut">Alt</span> (hold)</td>
+                            <td><span class="action">Activate Orbit Tool</span></td>
+                            <td><span class="notes">3D models only; press and hold to rotate view</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Edit2D Section -->
+            <div class="section" data-category="edit2d">
+                <h2><span class="badge badge-edit2d">EDIT2D</span>Polygon & Drawing Tools</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Keyboard Shortcut</th>
+                            <th width="25%">Action</th>
+                            <th width="30%">Notes</th>
+                            <th width="25%">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="shortcut-row" data-search="escape cancel polygon creation drawing">
+                            <td><span class="shortcut">Escape</span></td>
+                            <td><span class="action">Cancel Polygon/Polyline</span></td>
+                            <td><span class="notes">Discard current shape being drawn</span></td>
+                            <td><span class="viewer">Creation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="backspace remove last vertex">
+                            <td><span class="shortcut">Backspace</span></td>
+                            <td><span class="action">Remove Last Vertex</span></td>
+                            <td><span class="notes">Remove the most recently added point</span></td>
+                            <td><span class="viewer">Creation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="enter c finish polygon shape">
+                            <td><span class="shortcut">Enter</span> or <span class="shortcut">C</span></td>
+                            <td><span class="action">Finish Polygon/Polyline</span></td>
+                            <td><span class="notes">Complete shape and exit drawing mode</span></td>
+                            <td><span class="viewer">Creation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="shift toggle snapping suppress">
+                            <td><span class="shortcut">Shift</span> (hold)</td>
+                            <td><span class="action">Toggle Snapping</span></td>
+                            <td><span class="notes">Suppress snapping while held; release to snap again</span></td>
+                            <td><span class="viewer">Creation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="space bypass edit tools navigation">
+                            <td><span class="shortcut">Space</span></td>
+                            <td><span class="action">Bypass Edit Tools</span></td>
+                            <td><span class="notes">Allow default viewer navigation during editing</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="backspace delete vertex edit">
+                            <td><span class="shortcut">Backspace</span></td>
+                            <td><span class="action">Delete Selected Vertex</span></td>
+                            <td><span class="notes">Remove selected point during editing</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="escape cancel edit mode">
+                            <td><span class="shortcut">Escape</span></td>
+                            <td><span class="action">Cancel Edit Mode</span></td>
+                            <td><span class="notes">Exit polygon editing and deselect</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="a change edge arc bezier curve">
+                            <td><span class="shortcut">A</span></td>
+                            <td><span class="action">Change Edge to Arc</span></td>
+                            <td><span class="notes">Convert selected edge to Bezier arc curve</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="l change arc line straight">
+                            <td><span class="shortcut">L</span></td>
+                            <td><span class="action">Change Arc to Line</span></td>
+                            <td><span class="notes">Convert curved arc back to straight line</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="e change segment ellipse arc">
+                            <td><span class="shortcut">E</span></td>
+                            <td><span class="action">Change Segment to Ellipse Arc</span></td>
+                            <td><span class="notes">Convert selected segment to elliptical arc</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl hold add new vertex edge hover">
+                            <td><span class="shortcut">Ctrl</span> (hold)</td>
+                            <td><span class="action">Add New Vertex</span></td>
+                            <td><span class="notes">Hold while hovering over edge to insert new point</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+c copy shape">
+                            <td><span class="shortcut">Ctrl+C</span></td>
+                            <td><span class="action">Copy Shape</span></td>
+                            <td><span class="notes">Copy selected shape to clipboard</span></td>
+                            <td><span class="viewer">Clipboard</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+x cut shape">
+                            <td><span class="shortcut">Ctrl+X</span></td>
+                            <td><span class="action">Cut Shape</span></td>
+                            <td><span class="notes">Cut selected shape (if enabled)</span></td>
+                            <td><span class="viewer">Clipboard</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+v paste shape">
+                            <td><span class="shortcut">Ctrl+V</span></td>
+                            <td><span class="action">Paste Shape</span></td>
+                            <td><span class="notes">Paste shape from clipboard</span></td>
+                            <td><span class="viewer">Clipboard</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="right-click context menu">
+                            <td><span class="shortcut">Right-click</span></td>
+                            <td><span class="action">Context Menu</span></td>
+                            <td><span class="notes">Open menu for edge/vertex operations</span></td>
+                            <td><span class="viewer">Context</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Markup Section -->
+            <div class="section" data-category="markup">
+                <h2><span class="badge badge-markup">MARKUP</span>Markup Tool Shortcuts</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Keyboard Shortcut</th>
+                            <th width="25%">Action</th>
+                            <th width="30%">Notes</th>
+                            <th width="25%">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="shortcut-row" data-search="ctrl+x cut markup">
+                            <td><span class="shortcut">Ctrl+X</span></td>
+                            <td><span class="action">Cut Markup</span></td>
+                            <td><span class="notes">Cut selected markup to clipboard</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+c copy markup">
+                            <td><span class="shortcut">Ctrl+C</span></td>
+                            <td><span class="action">Copy Markup</span></td>
+                            <td><span class="notes">Copy selected markup to clipboard</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+v paste markup">
+                            <td><span class="shortcut">Ctrl+V</span></td>
+                            <td><span class="action">Paste Markup</span></td>
+                            <td><span class="notes">Paste markup from clipboard</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+d duplicate markup">
+                            <td><span class="shortcut">Ctrl+D</span></td>
+                            <td><span class="action">Duplicate Markup</span></td>
+                            <td><span class="notes">Create a copy of selected markup</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+z undo">
+                            <td><span class="shortcut">Ctrl+Z</span></td>
+                            <td><span class="action">Undo</span></td>
+                            <td><span class="notes">Undo last markup action</span></td>
+                            <td><span class="viewer">History</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+shift+z redo">
+                            <td><span class="shortcut">Ctrl+Shift+Z</span></td>
+                            <td><span class="action">Redo</span></td>
+                            <td><span class="notes">Redo last undone action</span></td>
+                            <td><span class="viewer">History</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+y redo alternative">
+                            <td><span class="shortcut">Ctrl+Y</span></td>
+                            <td><span class="action">Redo (Alternative)</span></td>
+                            <td><span class="notes">Alternative keyboard shortcut for redo</span></td>
+                            <td><span class="viewer">History</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="escape cancel deselect">
+                            <td><span class="shortcut">Escape</span></td>
+                            <td><span class="action">Cancel / Deselect</span></td>
+                            <td><span class="notes">Close markup context menu or deselect</span></td>
+                            <td><span class="viewer">Selection</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="backspace delete markup">
+                            <td><span class="shortcut">Backspace</span> or <span class="shortcut">Delete</span></td>
+                            <td><span class="action">Delete Selected Markup</span></td>
+                            <td><span class="notes">Remove selected markup element</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="f12 developer console">
+                            <td><span class="shortcut">F12</span></td>
+                            <td><span class="action">Developer Console</span></td>
+                            <td><span class="notes">Pass-through; not consumed by markup tool</span></td>
+                            <td><span class="viewer">Debug</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- BIM Markups Section -->
+            <div class="section" data-category="markup">
+                <h2><span class="badge badge-markup-bim">BIM MARKUPS</span>BIM Markups Tool Shortcuts</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Keyboard Shortcut</th>
+                            <th width="25%">Action</th>
+                            <th width="30%">Notes</th>
+                            <th width="25%">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="shortcut-row" data-search="ctrl+a select all markups">
+                            <td><span class="shortcut">Ctrl+A</span></td>
+                            <td><span class="action">Select All Markups</span></td>
+                            <td><span class="notes">Select all markups in active session</span></td>
+                            <td><span class="viewer">Selection</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+x cut">
+                            <td><span class="shortcut">Ctrl+X</span></td>
+                            <td><span class="action">Cut</span></td>
+                            <td><span class="notes">Cut selected markups</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+c copy">
+                            <td><span class="shortcut">Ctrl+C</span></td>
+                            <td><span class="action">Copy</span></td>
+                            <td><span class="notes">Copy selected markups</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+v paste">
+                            <td><span class="shortcut">Ctrl+V</span></td>
+                            <td><span class="action">Paste</span></td>
+                            <td><span class="notes">Paste markups from clipboard</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+d duplicate">
+                            <td><span class="shortcut">Ctrl+D</span></td>
+                            <td><span class="action">Duplicate</span></td>
+                            <td><span class="notes">Create copies of selected markups</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+z undo">
+                            <td><span class="shortcut">Ctrl+Z</span></td>
+                            <td><span class="action">Undo</span></td>
+                            <td><span class="notes">Undo last action</span></td>
+                            <td><span class="viewer">History</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+shift+z redo">
+                            <td><span class="shortcut">Ctrl+Shift+Z</span></td>
+                            <td><span class="action">Redo</span></td>
+                            <td><span class="notes">Redo last undone action</span></td>
+                            <td><span class="viewer">History</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="ctrl+y redo alternative">
+                            <td><span class="shortcut">Ctrl+Y</span></td>
+                            <td><span class="action">Redo (Alternative)</span></td>
+                            <td><span class="notes">Alternative keyboard shortcut for redo</span></td>
+                            <td><span class="viewer">History</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="escape deselect end session">
+                            <td><span class="shortcut">Escape</span></td>
+                            <td><span class="action">Deselect / End Session</span></td>
+                            <td><span class="notes">Deselect all or discard layer</span></td>
+                            <td><span class="viewer">Selection</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="backspace delete delete in-edit markups">
+                            <td><span class="shortcut">Backspace</span> or <span class="shortcut">Delete</span></td>
+                            <td><span class="action">Delete In-Edit Markups</span></td>
+                            <td><span class="notes">Delete currently editing markups</span></td>
+                            <td><span class="viewer">Editing</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="shift hold modifier extended operations">
+                            <td><span class="shortcut">Shift</span> (hold)</td>
+                            <td><span class="action">Shift Modifier</span></td>
+                            <td><span class="notes">Enable shift-modifier for extended operations</span></td>
+                            <td><span class="viewer">Modifier</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ACC Viewer Section -->
+            <div class="section" data-category="acc">
+                <h2><span class="badge badge-acc">ACC VIEWER</span>Table Navigation Shortcuts</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="20%">Keyboard Shortcut</th>
+                            <th width="25%">Action</th>
+                            <th width="30%">Notes</th>
+                            <th width="25%">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="shortcut-row" data-search="arrow up navigate up table">
+                            <td><span class="shortcut">↑ Arrow Up</span></td>
+                            <td><span class="action">Navigate Up</span></td>
+                            <td><span class="notes">Move selection up in table</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="arrow down navigate down table">
+                            <td><span class="shortcut">↓ Arrow Down</span></td>
+                            <td><span class="action">Navigate Down</span></td>
+                            <td><span class="notes">Move selection down in table</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="arrow right navigate expand row">
+                            <td><span class="shortcut">→ Arrow Right</span></td>
+                            <td><span class="action">Navigate Right / Expand</span></td>
+                            <td><span class="notes">Move right or expand selected row</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="arrow left navigate collapse row">
+                            <td><span class="shortcut">← Arrow Left</span></td>
+                            <td><span class="action">Navigate Left / Collapse</span></td>
+                            <td><span class="notes">Move left or collapse selected row</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="escape exit navigation mode">
+                            <td><span class="shortcut">Escape</span></td>
+                            <td><span class="action">Exit Navigation Mode</span></td>
+                            <td><span class="notes">Exit table navigation</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="space row selection">
+                            <td><span class="shortcut">Space</span></td>
+                            <td><span class="action">Row Selection</span></td>
+                            <td><span class="notes">Select/deselect row in table</span></td>
+                            <td><span class="viewer">Selection</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="enter activate confirm">
+                            <td><span class="shortcut">Enter</span></td>
+                            <td><span class="action">Activate / Confirm</span></td>
+                            <td><span class="notes">Confirm selection or action</span></td>
+                            <td><span class="viewer">Action</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="tab navigation">
+                            <td><span class="shortcut">Tab</span></td>
+                            <td><span class="action">Tab Navigation</span></td>
+                            <td><span class="notes">Move focus to next element</span></td>
+                            <td><span class="viewer">Navigation</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="c copy">
+                            <td><span class="shortcut">C</span></td>
+                            <td><span class="action">Copy</span></td>
+                            <td><span class="notes">Copy selected data (bulk operations)</span></td>
+                            <td><span class="viewer">Bulk Operations</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="v paste">
+                            <td><span class="shortcut">V</span></td>
+                            <td><span class="action">Paste</span></td>
+                            <td><span class="notes">Paste data (bulk operations)</span></td>
+                            <td><span class="viewer">Bulk Operations</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="b bulk action">
+                            <td><span class="shortcut">B</span></td>
+                            <td><span class="action">Bulk Action</span></td>
+                            <td><span class="notes">Trigger bulk operation</span></td>
+                            <td><span class="viewer">Bulk Operations</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="s save">
+                            <td><span class="shortcut">S</span></td>
+                            <td><span class="action">Save</span></td>
+                            <td><span class="notes">Save changes</span></td>
+                            <td><span class="viewer">Data Operations</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="d delete">
+                            <td><span class="shortcut">D</span></td>
+                            <td><span class="action">Delete</span></td>
+                            <td><span class="notes">Delete selected item</span></td>
+                            <td><span class="viewer">Data Operations</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="f filter">
+                            <td><span class="shortcut">F</span></td>
+                            <td><span class="action">Filter</span></td>
+                            <td><span class="notes">Open filter menu</span></td>
+                            <td><span class="viewer">Data Operations</span></td>
+                        </tr>
+                        <tr class="shortcut-row" data-search="i info details">
+                            <td><span class="shortcut">I</span></td>
+                            <td><span class="action">Info / Details</span></td>
+                            <td><span class="notes">Show details panel</span></td>
+                            <td><span class="viewer">Information</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="summary">
+            <strong>📊 Summary:</strong> Total of 50+ keyboard shortcuts across 5 viewer tools and extensions. Last updated: July 10, 2026. Source: firefly.js, ACC Viewer UI, and related extension codebases.
+        </div>
+    </div>
+
+    <script>
+        const searchBox = document.getElementById('searchBox');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const sections = document.querySelectorAll('.section');
+        const shortcutRows = document.querySelectorAll('.shortcut-row');
+
+        let activeFilter = 'all';
+
+        // Search functionality
+        searchBox.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            shortcutRows.forEach(row => {
+                const searchData = row.getAttribute('data-search').toLowerCase();
+                const text = row.textContent.toLowerCase();
+
+                if (searchTerm === '' || searchData.includes(searchTerm) || text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updateSectionVisibility();
+        });
+
+        // Filter functionality
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.getAttribute('data-filter');
+
+                if (activeFilter === 'all') {
+                    sections.forEach(section => section.style.display = '');
+                } else {
+                    sections.forEach(section => {
+                        const category = section.getAttribute('data-category');
+                        section.style.display = category === activeFilter ? '' : 'none';
+                    });
+                }
+
+                // Re-apply search filter
+                searchBox.dispatchEvent(new Event('input'));
+            });
+        });
+
+        function updateSectionVisibility() {
+            sections.forEach(section => {
+                const visibleRows = section.querySelectorAll('.shortcut-row:not([style*="display: none"])').length;
+                section.style.display = visibleRows > 0 ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

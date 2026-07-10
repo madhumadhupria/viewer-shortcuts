@@ -52,12 +52,12 @@
             display: flex;
             gap: 10px;
             align-items: center;
-            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .search-box {
-            flex: 1;
-            min-width: 250px;
+            width: 100%;
+            max-width: 500px;
             padding: 10px 15px;
             border: 1px solid #dee2e6;
             border-radius: 4px;
@@ -68,33 +68,6 @@
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 14px;
-            border: 1px solid #dee2e6;
-            background: white;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-
-        .filter-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
-        }
-
-        .filter-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
         }
 
         .content {
@@ -243,26 +216,12 @@
 
             .search-section {
                 padding: 15px 20px;
-                flex-direction: column;
-                gap: 12px;
             }
 
             .search-box {
-                min-width: 100%;
+                max-width: 100%;
                 padding: 10px 12px;
                 font-size: 14px;
-            }
-
-            .filter-buttons {
-                gap: 6px;
-                width: 100%;
-            }
-
-            .filter-btn {
-                padding: 8px 12px;
-                font-size: 12px;
-                flex: 1;
-                min-width: 0;
             }
 
             .content {
@@ -331,17 +290,12 @@
 
             .search-section {
                 padding: 12px 15px;
-                gap: 10px;
             }
 
             .search-box {
                 padding: 8px 10px;
                 font-size: 13px;
-            }
-
-            .filter-btn {
-                padding: 6px 10px;
-                font-size: 11px;
+                max-width: 100%;
             }
 
             .content {
@@ -404,13 +358,6 @@
 
         <div class="search-section">
             <input type="text" class="search-box" id="searchBox" placeholder="Search shortcuts (e.g., 'copy', 'Ctrl+C', 'Edit2D')...">
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="lmv">LMV Viewer</button>
-                <button class="filter-btn" data-filter="edit2d">Edit2D</button>
-                <button class="filter-btn" data-filter="markup">Markups</button>
-                <button class="filter-btn" data-filter="acc">ACC Viewer</button>
-            </div>
         </div>
 
         <div class="content">
@@ -819,11 +766,8 @@
 
     <script>
         const searchBox = document.getElementById('searchBox');
-        const filterButtons = document.querySelectorAll('.filter-btn');
         const sections = document.querySelectorAll('.section');
         const shortcutRows = document.querySelectorAll('.shortcut-row');
-
-        let activeFilter = 'all';
 
         // Search functionality
         searchBox.addEventListener('input', (e) => {
@@ -841,27 +785,6 @@
             });
 
             updateSectionVisibility();
-        });
-
-        // Filter functionality
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                activeFilter = btn.getAttribute('data-filter');
-
-                if (activeFilter === 'all') {
-                    sections.forEach(section => section.style.display = '');
-                } else {
-                    sections.forEach(section => {
-                        const category = section.getAttribute('data-category');
-                        section.style.display = category === activeFilter ? '' : 'none';
-                    });
-                }
-
-                // Re-apply search filter
-                searchBox.dispatchEvent(new Event('input'));
-            });
         });
 
         function updateSectionVisibility() {
